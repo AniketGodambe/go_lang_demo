@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "contact_name": "Aniket",
+    "preferred_channel": [
+      {
+        "id": 0,
+        "channel_name": "Phone",
+        "channel_details": "123-456-7890"
+      }
+    ],
+    "preferred_language": [
+      "English",
+      "Spanish"
+    ]
+  },
+  {
+    "id": 2,
+    "contact_name": "Pawan",
+    "preferred_channel": [
+      {
+        "id": 0,
+        "channel_name": "Phone",
+        "channel_details": "123-456-7890"
+      }
+    ],
+    "preferred_language": [
+      "English",
+      "Spanish"
+    ]
+  },
+  {
+    "id": 3,
+    "contact_name": "Vallabh",
+    "preferred_channel": [
+      {
+        "id": 0,
+        "channel_name": "Phone",
+        "channel_details": "123-456-7890"
+      }
+    ],
+    "preferred_language": [
+      "English",
+      "Spanish"
+    ]
+  },
+  {
+    "id": 4,
+    "contact_name": "Rajesh",
+    "preferred_channel": [
+      {
+        "id": 0,
+        "channel_name": "Email",
+        "channel_details": "rajesh@gmail.com"
+      }
+    ],
+    "preferred_language": [
+      "English",
+      "Spanish"
+    ]
+  },
+  {
+    "id": 5,
+    "contact_name": "Anuj",
+    "preferred_channel": [
+      {
+        "id": 0,
+        "channel_name": "WhatsApp",
+        "channel_details": "8989898989"
+      }
+    ],
+    "preferred_language": [
+      "English",
+      "Spanish"
+    ]
+  },
+  {
+    "id": 6,
+    "contact_name": "Anuj",
+    "preferred_channel": [
+      {
+        "id": 0,
+        "channel_name": "WhatsApp",
+        "channel_details": "8989898989"
+      },
+      {
+        "id": 0,
+        "channel_name": "WhatsApp",
+        "channel_details": "8989898989"
+      },
+      {
+        "id": 0,
+        "channel_name": "WhatsApp",
+        "channel_details": "8989898989"
+      }
+    ],
+    "preferred_language": [
+      "English",
+      "Spanish"
+    ]
+  }
+]
