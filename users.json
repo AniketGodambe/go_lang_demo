@@ -1,0 +1,34 @@
+[
+  {
+    "userId": 1,
+    "user_name": "Pratik",
+    "mobile": "9260361427",
+    "email": "sasa@fs.com",
+    "city": "Sion",
+    "age": 18
+  },
+  {
+    "userId": 2,
+    "user_name": "Aniket",
+    "mobile": "9260361427",
+    "email": "aniket@fs.com",
+    "city": "Kalyan",
+    "age": 18
+  },
+  {
+    "userId": 3,
+    "user_name": "Aniket",
+    "mobile": "9260361427",
+    "email": "anikets@fs.com",
+    "city": "Kalyan",
+    "age": 18
+  },
+  {
+    "userId": 4,
+    "user_name": "Aniket",
+    "mobile": "9260361429",
+    "email": "aniketdss@fs.com",
+    "city": "Kalyan",
+    "age": 18
+  }
+]

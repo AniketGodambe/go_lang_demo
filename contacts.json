@@ -98,5 +98,20 @@
       "English",
       "Spanish"
     ]
+  },
+  {
+    "id": 7,
+    "contact_name": "Rajul Singh",
+    "preferred_channel": [
+      {
+        "id": 0,
+        "channel_name": "Phone",
+        "channel_details": "123-456-7890"
+      }
+    ],
+    "preferred_language": [
+      "English",
+      "Spanish"
+    ]
   }
 ]
