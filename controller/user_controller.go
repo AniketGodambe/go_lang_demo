@@ -17,7 +17,7 @@ import (
 // getAllContacts fetches all contacts from the database
 func getAllContacts() ([]model.Contact, error) {
 	var contacts []model.Contact
-	cursor, err := Collection.Find(context.Background(), bson.D{{}})
+	cursor, err := ContactsCollection.Find(context.Background(), bson.D{{}})
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +58,7 @@ func GetAllContactHandler(w http.ResponseWriter, r *http.Request) {
 
 func createOneContact(contact model.Contact) (bool, string, int) {
 	var existingContact model.Contact
-	err := Collection.FindOne(context.TODO(), bson.M{"mobile": contact.Mobile}).Decode(&existingContact)
+	err := ContactsCollection.FindOne(context.TODO(), bson.M{"mobile": contact.Mobile}).Decode(&existingContact)
 	if err == nil {
 		return false, "Mobile number already exists!", 0
 	} else if err != mongo.ErrNoDocuments {
@@ -66,7 +66,7 @@ func createOneContact(contact model.Contact) (bool, string, int) {
 		return false, "Database error!", 0
 	}
 
-	count, err := Collection.CountDocuments(context.TODO(), bson.M{})
+	count, err := ContactsCollection.CountDocuments(context.TODO(), bson.M{})
 	if err != nil {
 		log.Println("Error counting documents:", err)
 		return false, "Failed to generate user ID!", 0
@@ -74,7 +74,7 @@ func createOneContact(contact model.Contact) (bool, string, int) {
 
 	contact.ID = int(count) + 1
 
-	result, err := Collection.InsertOne(context.TODO(), contact)
+	result, err := ContactsCollection.InsertOne(context.TODO(), contact)
 	if err != nil {
 		log.Println("Error inserting contact:", err)
 		return false, "Failed to insert contact!", 0
@@ -145,7 +145,7 @@ func deleteOneContact(contactId string) (bool, string, int64) {
 	}
 
 	filter := bson.M{"_id": id}
-	result, err := Collection.DeleteOne(context.Background(), filter)
+	result, err := ContactsCollection.DeleteOne(context.Background(), filter)
 	if err != nil {
 		log.Println("Error deleting contact:", err)
 		return false, "Database error!", 0
@@ -204,7 +204,7 @@ func DeleteOneContactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func deleteAllContact() (int64, error) {
-	result, err := Collection.DeleteMany(context.Background(), bson.D{{}})
+	result, err := ContactsCollection.DeleteMany(context.Background(), bson.D{{}})
 	if err != nil {
 		return 0, err
 	}
@@ -271,7 +271,7 @@ func updateContact(contactID int, name string, age int) (int64, error) {
 	filter := bson.M{"_id": contactID}
 	update := bson.M{"$set": bson.M{"contact_name": name, "age": age}}
 
-	result, err := Collection.UpdateOne(context.Background(), filter, update)
+	result, err := ContactsCollection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
 		log.Println("Error updating contact:", err)
 		return 0, err

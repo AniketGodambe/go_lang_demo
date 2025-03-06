@@ -12,10 +12,12 @@ import (
 // MongoDB connection constants
 const connectionString = "mongodb+srv://aniketgodambe:aniketgodambe@cluster0.ehh0w.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 const dbName = "contactdb"
-const collName = "contacts"
+const contactsColl = "contacts"
+const questionsColl = "questions"
 
-// Global variable for the MongoDB collection
-var Collection *mongo.Collection
+// Global variables for MongoDB collections
+var ContactsCollection *mongo.Collection
+var QuestionsCollection *mongo.Collection
 
 // Initialize MongoDB connection
 func InitDB() {
@@ -35,5 +37,9 @@ func InitDB() {
 	}
 
 	fmt.Println("✅ Connected to MongoDB!")
-	Collection = client.Database(dbName).Collection(collName)
+
+	// Initialize collections
+	db := client.Database(dbName)
+	ContactsCollection = db.Collection(contactsColl)
+	QuestionsCollection = db.Collection(questionsColl)
 }
