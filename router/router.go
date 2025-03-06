@@ -9,7 +9,7 @@ func Router() *mux.Router {
 	router := mux.NewRouter()
 
 	// Get List of Contacts API
-	router.HandleFunc("/api/getContacts", controller.DeleteOneContactHandler).Methods("GET")
+	router.HandleFunc("/api/getContacts", controller.GetAllContactHandler).Methods("GET")
 
 	router.HandleFunc("/api/addContact", controller.CreateContactHandler).Methods("POST")
 

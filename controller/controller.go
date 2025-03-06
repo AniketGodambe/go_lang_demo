@@ -76,17 +76,6 @@ func insertOneContact(contact model.Contact) (bool, string, int) {
 }
 
 // update record
-func updateContact(cotactId string) {
-
-	id, _ := primitive.ObjectIDFromHex(cotactId)
-	filter := bson.M{"_id": id}
-	update := bson.M{"$set": bson.M{"contact_name": "Aniket"}}
-	result, err := collection.UpdateOne(context.Background(), filter, update)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Contact updated successfully!", result.ModifiedCount)
-}
 
 func deleteOneContact(contactId string) {
 	id, _ := primitive.ObjectIDFromHex(contactId)
@@ -196,12 +185,50 @@ func DeleteAllContactHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("All contacts deleted successfully!"))
 }
 
+func updateContact(contactID int, name string, age int) (int64, error) {
+	filter := bson.M{"_id": contactID}
+	update := bson.M{"$set": bson.M{"contact_name": name, "age": age}}
+
+	result, err := collection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		log.Println("Error updating contact:", err)
+		return 0, err
+	}
+
+	return result.ModifiedCount, nil
+}
+
 func UpdateContactHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Allow-Control-Allow-Methods", "PUT")
+	w.Header().Set("Access-Control-Allow-Methods", "PUT")
 
-	params := r.URL.Query()
-	contactId := params.Get("id")
-	updateContact(contactId)
-	w.Write([]byte("Contact updated successfully!"))
+	// Decode JSON body into Contact struct
+	var contact model.Contact
+	err := json.NewDecoder(r.Body).Decode(&contact)
+	if err != nil {
+		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		return
+	}
+
+	// Validate that ID is present
+	if contact.ID == 0 {
+		http.Error(w, "ID is required", http.StatusBadRequest)
+		return
+	}
+
+	// Call update function
+	updatedCount, err := updateContact(contact.ID, contact.ContactName, contact.Age)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Return success response
+	response := fmt.Sprintf("Contact with ID %d updated successfully!", contact.ID)
+	if updatedCount == 0 {
+		response = "No contact was updated, possibly wrong ID."
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(response))
 }
