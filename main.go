@@ -5,10 +5,13 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/AniketGodambe/mongoapi/controller"
 	"github.com/AniketGodambe/mongoapi/router"
 )
 
 func main() {
+
+	controller.InitDB()
 
 	fmt.Println("Mongo DB API")
 	r := router.Router()
